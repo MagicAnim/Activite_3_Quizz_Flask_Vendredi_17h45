@@ -19,29 +19,24 @@
 </head>
 <body class="macondo-swash-caps-regular">
     <!-- HEADER DU SITE avec le TITRE DU SITE -->
-    <header class="flex justify-center"> 
+    <header> 
 
-        <img class="w-40" src="/static/arcane_accueil.jpeg">
-        <h1 class = " text-[32px] font-bold text-center text-white bg-indigo-400 py-4"> Quel personnage d'Arcane es-tu ? </h1>
+        <h1 class = "text-[32px] font-bold text-center text-white bg-indigo-400 py-4"> Quel personnage d'Arcane es-tu ? </h1>
 
     </header>
 
     <!-- MAIN -->
     <main class="text-center">
         <!-- Instructions -->
-        <p class="text-[21px] m-12  text-center "> Réponds aux questions pour deviner quel personnage d'Arcane tu ressembles le plus !</p>
+        <p class="text-[21px] m-12  text-center "> ENONCE DE LA QUESTION</p>
 
-        <!-- Image -->
-        <div class="flex fustify-center my-12">
-            <img src="/static/arcane_accueil.jpeg">
-        </div>
-        <!-- Bouton pour commencer le quizz -->
-        <a class="bg-indigo-400 py-4 px-6 rounded-lg text-white hover:bg-indigo-300" href="/question"> Allons-y ! </a>
+        <p class="italic"> Question {{session["numero_question"] + 1 }} sur 6 </p>
+
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-indigo-400 absolute bottom-0 w-full py-6">
-        <p class="text-center text-white">Copyright &copy Aimen</p>
+        <p class="text-center ">Copyright &copy Aimen</p>
     </footer>
     
 </body>
