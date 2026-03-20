@@ -19,31 +19,28 @@
 </head>
 <body class="macondo-swash-caps-regular">
     <!-- HEADER DU SITE avec le TITRE DU SITE -->
-    <header> 
-
-        <h1 class = "text-[32px] font-bold text-center text-white bg-indigo-400 py-4"> Quel personnage d'Arcane es-tu ? </h1>
+    <header > 
+        <h1 class=" text-[32px] font-bold text-center text-white bg-indigo-400 py-4"> Quel personnage d'Arcane es-tu ? </h1>
 
     </header>
 
     <!-- MAIN -->
     <main class="text-center">
-        <!-- Question -->
-        <p class="text-[21px] m-12  text-center "> {{enonce}}</p>
-        <!-- Reponses possibles -->
-        <ul class="my-10">
-            <li> <a href="/reponse/0">  {{reponses[0]}} </a></li>
-            <li> <a href="/reponse/1"> {{reponses[1]}} </a></li>
-            <li> <a href="/reponse/2"> {{reponses[2]}} </a></li>
-            <li> <a href="/reponse/3"> {{reponses[3]}} </a></li>
-        </ul>
-        
-        <p class="italic"> Question {{session["numero_question"] + 1 }} sur 6 </p>
+        <!-- Resultat -->
+        <h1> Tu es {{nom_gagnant}} !</h1>
+        <!-- Image -->
+        <div class="flex justify-center my-12">
+            <img class="h-100" src="/static/{{nom_gagnant}}.png">
+        </div>
+                <p class="text-[21px] m-12  text-center "> {{resultat_description}}</p>
 
+        <!-- Bouton pour commencer le quizz -->
+        <a class="bg-indigo-400 py-4 px-6 rounded-lg text-white hover:bg-indigo-300" href="/"> On recommence ! </a>
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-indigo-400 absolute bottom-0 w-full py-6">
-        <p class="text-center ">Copyright &copy Aimen</p>
+        <p class="text-center text-white">Copyright &copy Aimen</p>
     </footer>
     
 </body>

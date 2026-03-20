@@ -1,8 +1,9 @@
 # Importation de Flask
 # render_template
 # et le module random pour l'aléatoire
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from questions import questions
+from resultats import resultats, noms
 
 from os import urandom
 
@@ -53,13 +54,36 @@ def question():
         symboles = list(symboles_et_reponses.keys())
         # On stocke les symboles et leur ordre dans un cookie
         session["symboles"] = symboles
-        # On affiche notre page de la question
+        # On affiche notre page de la question  
         return render_template("question.html", enonce = enonce_question, reponses = reponses, symboles = symboles )
-    
     # S'il n'y a plus de questions on affiche le resultat
     else :
-        return render_template("resultat.html")
+        # On recupère le score et notamment le symbole qui a eu le plus de réponse associé
+        # Sorted trie les scores et renvoie une liste
+        # reverse = True -> la liste est triée par ordre décroissant 
+        scores_tries = sorted(session["score"], key = session["score"].get, reverse = True)
+        # On récupère le symbole qui a le plus de points -> INITIAL DU GAGNANT
+        gagnant = scores_tries[0]
+        # On recup le nom du gagnant
+        nom_gagnant = noms[gagnant]
+        # On récupère la description correspondante
+        resultat_description = resultats[gagnant]
+        # On affiche le resultat
+        return render_template("resultat.html", nom_gagnant = nom_gagnant ,resultat_description = resultat_description)
 
+
+# route reponse pour comptabiliser les scores et passer à la question suivante
+@app.route("/reponse/<numero>")
+def reponse(numero):
+    # On récupère le symbole associé à la réponse sélectionné
+    # conversion de numero : str -> int car on l'utilise comme indice pour récupérer le bon symbole
+    symbole = session["symboles"][int(numero)]
+    # On incrémente le score correspondant
+    session["score"][symbole] += 1
+    # On incrémente le cookie numero_question pour passer à la suivante
+    session["numero_question"] +=1 
+    # On redirige vers  la question suivante
+    return redirect("/question")
 
 ####################################
 #  TOUJOURS A LA FIN DU CODE       #
